@@ -1,0 +1,4 @@
+com\game\battle\BattleHelper.class
+com\game\character\Hero.class
+com\game\character\Enemy.class
+com\game\demo\DemoFight.class
