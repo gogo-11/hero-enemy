@@ -6,16 +6,18 @@ import com.game.character.*;
 import java.util.Random;
 
 public class DemoFight {
+    private static final int CRIT_THRESHOLD_ENEMY = 1;
+    private static final int CRIT_THRESHOLD_HERO = 3;
 
     public static void main(String[] args) {
 
         Hero hero = new Hero("Arnold Schwarzenegger");
         Hero hero2 = new Hero();
-        Hero heroStronger = hero.compareHero(hero2);
+        Hero heroStronger = (Hero) hero.compareCharacter(hero2);
         Enemy enemy2 = new Enemy();
 
         System.out.print("Hero is: ");
-        heroStronger.displayHeroStats();
+        heroStronger.displayCharacterStats();
         int heroWins = 0;
         int roundsToPlay = 5;
 
@@ -33,11 +35,11 @@ public class DemoFight {
                 }
 
             Enemy enemy = new Enemy(enemyHealthRand,enemyStrengthRand, enemyLevelRand);
-            Enemy enemyStronger = enemy.compareEnemy(enemy2);
+            Enemy enemyStronger = (Enemy) enemy.compareCharacter(enemy2);
 
             System.out.println("\n\n");
-            heroStronger.displayHeroStats();
-            enemyStronger.displayEnemyStats();
+            heroStronger.displayCharacterStats();
+            enemyStronger.displayCharacterStats();
 
             int enemyStats = enemyStronger.getHealth() + enemyStronger.getStrength();
             int heroStats = 130 * heroStronger.getLevel();
@@ -54,11 +56,11 @@ public class DemoFight {
 
                 for (int j = 0; j < attackCount; j++) {
                     if(!coinHeadsTails) {
-                        heroStronger.attack(enemyStronger);
-                        enemyStronger.attack(heroStronger);
+                        heroStronger.attack(enemyStronger, CRIT_THRESHOLD_HERO);
+                        enemyStronger.attack(heroStronger, CRIT_THRESHOLD_ENEMY);
                     } else {
-                        enemyStronger.attack(heroStronger);
-                        heroStronger.attack(enemyStronger);
+                        enemyStronger.attack(heroStronger, CRIT_THRESHOLD_ENEMY);
+                        heroStronger.attack(enemyStronger, CRIT_THRESHOLD_HERO);
                     }
                     BattleHelper.battleOutcome(heroStronger, enemyStronger);
 
@@ -73,7 +75,7 @@ public class DemoFight {
 
         if(heroWins >= roundsToPlay) {
             System.out.println("\nYour hero won!");
-            heroStronger.displayHeroStats();
+            heroStronger.displayCharacterStats();
         } else {
             System.out.println("\nYour hero lost!");
         }

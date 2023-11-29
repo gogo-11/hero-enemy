@@ -2,17 +2,14 @@ package com.game.character;
 
 import java.util.Random;
 
-public class Hero  {
+public class Hero extends Character {
     public static final int MAX_HEALTH_BASE = 100;
     public static final int ENERGY_OVERFLOW = 20;
     public static final int HEALTH_INCREASE = 50;
     public static final int VICTORY_EXPERIENCE_BONUS = 50;
 
     private String name;
-    private int health;
-    private int strength;
     private int experience;
-	private int level;
 
     public Hero() {
         this.name = "Default name";
@@ -27,17 +24,6 @@ public class Hero  {
         this.strength = heroStrength();
         this.experience = 0; //начални точки опит
         this.level = 1;
-    }
-
-	public void attack(Enemy enemy) {
-        Random rand1 = new Random();
-        int criticalAttack = rand1.nextInt(11)+1;
-
-        if (criticalAttack <= 3){
-            enemy.setHealth(enemy.getHealth()-(this.strength+3)); //критичен удар
-        } else {
-            enemy.setHealth(enemy.getHealth()-this.strength);
-        }
     }
 
     public void avoid() {
@@ -76,23 +62,8 @@ public class Hero  {
         }
     }
 
-    public Hero compareHero (Hero hero2) {
-        if(this.getStrength() > hero2.getStrength()){
-            return this;
-        } else if (this.getStrength() < this.getStrength()) {
-            return hero2;
-        } else {
-            if(this.getHealth() > hero2.getHealth()) {
-                return this;
-            } else if (this.getHealth() < hero2.getHealth()) {
-                return hero2;
-            } else {
-                return this;
-            }
-        }
-    }
-
-    public void displayHeroStats() {
+    @Override
+    public void displayCharacterStats() {
         System.out.println(name + ", HP: " +  health + ", strength: " + strength + ", experience " + experience + ", at level " + level);
     }
 
@@ -100,10 +71,6 @@ public class Hero  {
         Random r1 = new Random();
         int heroStrength = r1.nextInt(5)+5;
         return heroStrength;
-    }
-
-    public String getName() {
-        return name;
     }
 
     public int getHealth() {
@@ -124,17 +91,5 @@ public class Hero  {
 
     public void setHealth(int health) {
         this.health = health;
-    }
-
-    public void setStrength(int strength) {
-        this.strength = strength;
-    }
-
-    public void setExperience(int experience) {
-        this.experience = experience;
-    }
-
-    public void setLevel(int level) {
-        this.level = level;
     }
 }

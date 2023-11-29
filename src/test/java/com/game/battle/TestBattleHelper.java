@@ -22,8 +22,8 @@ public class TestBattleHelper {
     void testBattleOutcome () {
         int attackCount = enemy.getHealth()+hero.getHealth();
         for (int i = 0; i < attackCount; i++) {
-            hero.attack(enemy);
-            enemy.attack(hero);
+            hero.attack(enemy, 3);
+            enemy.attack(hero, 1);
             battleOutcome(hero,enemy);
 
             if(BattleHelper.cycleEnd) {
