@@ -38,7 +38,7 @@ public class TestCharactersMethods {
     @Test
     void enemyAttackMethodCheck() {
         int heroHealthPoints = hero.getHealth();
-        enemy.attack(hero);
+        enemy.attack(hero, 1);
         assertTrue(hero.getHealth() < heroHealthPoints, "атаката на врага не функционира правилно");
     }
 }

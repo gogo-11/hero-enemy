@@ -16,7 +16,6 @@ public class BattleHelper {
             heroStronger.restoreHealthAfterWin(enemyStronger);
             heroStronger.levelUp();
             cycleEnd = true;
-            return cycleEnd;
         }
         return cycleEnd;
     }
